@@ -8,12 +8,13 @@ public class ReadObject {
         try {
             FileInputStream fis = new FileInputStream("people.bin");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            Person person1 = (Person) ois.readObject();
-            Person person2 = (Person) ois.readObject();
 
-            System.out.println(person1);
-            System.out.println(person2);
+            int personCount = ois.readInt(); // exception
+            Person[] people = new Person[personCount];
 
+            for (int i = 0; i < personCount; i++){
+                people[i] = (Person) ois.readObject();
+            }
 
             ois.close();
         } catch (IOException e) {
